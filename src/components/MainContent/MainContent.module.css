@@ -1,6 +1,3 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  overflow: hidden;
-
+  display: contents;
 }
