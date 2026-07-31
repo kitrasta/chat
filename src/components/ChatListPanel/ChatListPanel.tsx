@@ -8,12 +8,11 @@ const ChatListPanel = () => {
     return (
         <div className={styles.wrapper}>
           <div className={styles.header_chat}>
-            <h3><span>Chats</span></h3>
+            <h3 className={styles.title}>Chats</h3>
           </div>
             <div className={styles.chatlists}>
                 <NoConversionsChat />
                 <BottomNavLeft />
-
             </div>
         </div>
     )
