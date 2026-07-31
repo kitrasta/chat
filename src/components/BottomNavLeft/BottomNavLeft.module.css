@@ -1,0 +1,30 @@
+.bottom_nav_left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* или space-between */
+    align-items: center;
+    width: 100%;
+       position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+border-top: 1px solid var(--color-border-color-border-light);
+background: var(--color-background-color-background1);
+}
+
+.nav_button {
+    display: flex;
+    flex-direction: column; /* иконка сверху, текст снизу */
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--color-icon-color-icon-secondary);
+
+    }
+
+        .nav_button:hover {
+        color: #6852D6;
+    }
