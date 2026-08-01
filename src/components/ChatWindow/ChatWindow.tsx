@@ -8,8 +8,10 @@ const ChatWindow = () => {
     return (
         <div className={styles.wrapper}>
             <WindowHeader />
-            <h2>Chat Window</h2>
-            <p>This is the chat window area.</p>
+            <div className={styles.content}>
+                <h2>Chat Window</h2>
+                <p>This is the chat window area.</p>
+            </div>
         </div>
     )
 }
