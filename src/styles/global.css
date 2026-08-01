@@ -1,17 +1,29 @@
 :root {
-  /* Color Palette - Dark Mode (Commercial Look) */
-  --color-bg-main: #1a1a1a;
-  --color-bg-secondary: #242424;
-  --color-bg-tertiary: #2f2f2f;
+  /* Light Theme (Default) */
+  --color-bg-main: #ffffff;
+  --color-bg-secondary: #f5f5f7;
+  --color-bg-tertiary: #e8e8ed;
   
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
-  --color-accent: #007bff;
-  --color-border: #333333;
+  --color-text-primary: #1c1c1e;
+  --color-text-secondary: #8e8e93;
+  --color-accent: #007aff;
+  --color-border: #d1d1d6;
   
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --radius-md: 8px;
-  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-sm: 6px;
+}
+
+body.dark-theme {
+  /* Dark Theme (Based on reference) */
+  --color-bg-main: #121212;
+  --color-bg-secondary: #1c1c1e;
+  --color-bg-tertiary: #2c2c2e;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1a6;
+  --color-accent: #0a84ff;
+  --color-border: #3a3a3c;
 }
 
 * {
@@ -25,10 +37,16 @@ body {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 button {
   cursor: pointer;
   border: none;
   outline: none;
+  transition: opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.8;
 }
