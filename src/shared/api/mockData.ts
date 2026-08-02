@@ -1,4 +1,4 @@
-import { Chat, Message } from '../../entities/chat/types';
+import type { Chat, Message } from '../../entities/chat/types';
 
 export const MOCK_CHATS: Chat[] = [
   {
@@ -25,7 +25,6 @@ export const MOCK_CHATS: Chat[] = [
       senderId: 'user3',
       text: 'Matrix server is almost ready',
       timestamp: Date.now(),
-      y: 0, // This was just to be a mock, actual type is Message
       status: 'read',
     },
     members: [],
