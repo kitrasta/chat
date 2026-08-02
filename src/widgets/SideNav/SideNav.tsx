@@ -1,4 +1,3 @@
-import React from 'react';
 import { Users, Phone, MessageSquare, Settings } from 'lucide-react';
 import styles from './SideNav.module.css';
 
