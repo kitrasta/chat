@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './App.module.css';
 import Layout from '../shared/ui/Layout/Layout';
 import ChatList from '../widgets/ChatList/ChatList';
