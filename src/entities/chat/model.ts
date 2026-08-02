@@ -1,21 +1,24 @@
 import { create } from 'zustand';
 import type { Chat, Message } from './types';
+import { MOCK_CHATS, MOCK_MESSAGES } from '../../shared/api/mockData';
 
 interface ChatState {
   chats: Chat[];
   activeChatId: string | null;
-  messages: Record<string, Message[]>; // ChatId -> Messages[]
+  messages: Record<string, Message[]>;
+  isDevMode: boolean;
   
-  // Actions
   setActiveChat: (id: string | null) => void;
   addMessage: (chatId: string, message: Message) => void;
   setChats: (chats: Chat[]) => void;
+  toggleDevMode: () => void;
 }
 
 export const useChatStore = create<ChatState>((set) => ({
-  chats: [],
+  chats: MOCK_CHATS, // Initial load for dev
   activeChatId: null,
-  messages: {},
+  messages: MOCK_MESSAGES,
+  isDevMode: true,
 
   setActiveChat: (id) => set({ activeChatId: id }),
   
@@ -27,4 +30,5 @@ export const useChatStore = create<ChatState>((set) => ({
   })),
 
   setChats: (chats) => set({ chats }),
+  toggleDevMode: () => set((state) => ({ isDevMode: !state.isDevMode })),
 }));
