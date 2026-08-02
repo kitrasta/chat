@@ -1,5 +1,5 @@
-import styles from './App.module.css';
 import React, { useState } from 'react';
+import styles from './App.module.css';
 import Layout from '../shared/ui/Layout/Layout';
 import ChatList from '../widgets/ChatList/ChatList';
 import ChatWindow from '../widgets/ChatWindow/ChatWindow';
@@ -12,27 +12,26 @@ function App() {
   return (
     <div className={styles.app}>
       <Layout>
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          height: '100%', 
-          width: '350px',
-          background: 'var(--color-bg-secondary)',
-          borderRight: '1px solid var(--color-border)'
-        }}>
-          <div style={{ flex: 1, overflow: 'hidden' }}>
+        <div className={styles.sidePanel}>
+          <div className={styles.panelContent}>
             {activeTab === 'chats' && <ChatList />}
-            {activeTab === 'contacts' && <div style={{ padding: '20px', color: 'var(--color-text-primary)' }}>Contacts Page</div>}
-            {activeTab === 'calls' && <div style={{ padding: '20px', color: 'var(--color-text-primary)' }}>Calls Page</div>}
-            {activeTab === 'settings' && <div style={{ padding: '20px', color: 'var(--color-text-primary)' }}>Settings Page</div>}
+            {activeTab === 'contacts' && (
+              <div className={styles.placeholder}>Contacts Page</div>
+            )}
+            {activeTab === 'calls' && (
+              <div className={styles.placeholder}>Calls Page</div>
+            )}
+            {activeTab === 'settings' && (
+              <div className={styles.placeholder}>Settings Page</div>
+            )}
           </div>
           <SideNav activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
         
-        <div style={{ flex: 1, height: '100%', overflow: 'hidden' }}>
+        <div className={styles.mainArea}>
           {activeTab === 'chats' ? <ChatWindow /> : (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: 'var(--color-text-secondary)' }}>
-              Please select a tab
+            <div className={styles.placeholder}>
+              Please select a chat to start messaging
             </div>
           )}
         </div>
