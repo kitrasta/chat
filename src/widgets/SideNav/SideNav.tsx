@@ -23,7 +23,7 @@ const SideNav = ({ activeTab, setActiveTab }: SideNavProps) => {
           className={`${styles.navItem} ${activeTab === id ? styles.active : ''}`}
           onClick={() => setActiveTab(id)}
         >
-          <Icon size={22} strokeWidth={2} />
+          <Icon size={22} strokeWidth={1} />
         </div>
       ))}
     </div>
