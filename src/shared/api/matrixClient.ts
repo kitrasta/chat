@@ -1,0 +1,1 @@
+export const HOMESERVER_URL = 'https://matrix.org';

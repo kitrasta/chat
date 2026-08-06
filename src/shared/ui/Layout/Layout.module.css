@@ -1,14 +1,30 @@
 .layout {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 350px 1fr; /* Левая панель 350px, правая - всё остальное */
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   background-color: var(--color-bg-main);
 }
 
-.mainContent {
+.leftColumn {
+  display: flex;
+  flex-direction: column; /* Элементы (список и навигация) идут друг за другом сверху вниз */
+  height: 100%;
+  width: 350px;
+  background-color: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.contentArea {
+  flex: 1; /* Занимает всё свободное место, выталкивая SideBar вниз */
+  overflow-y: auto; /* Только контент списка скроллится, а не вся панель */
+}
+
+.rightColumn {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  position: relative;
 }

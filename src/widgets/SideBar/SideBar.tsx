@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import styles from './ChatList.module.css';
+import styles from './SideBar.module.css';
 import { useChatStore } from '../../entities/chat/model';
 import CreateChatModal from '../../features/CreateChat/CreateChatModal';
 
-const ChatList = () => {
+const SideBar = () => {
   const { chats, activeChatId, setActiveChat } = useChatStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -43,10 +43,6 @@ const ChatList = () => {
         ))}
       </div>
 
-      <div className={styles.footer}>
-        <button className={styles.profileButton}>My Profile</button>
-      </div>
-
       <CreateChatModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
@@ -55,4 +51,4 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
+export default SideBar;

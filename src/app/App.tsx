@@ -1,42 +1,46 @@
-import { useState } from 'react';
-import styles from './App.module.css';
-import Layout from '../shared/ui/Layout/Layout';
-import ChatList from '../widgets/ChatList/ChatList';
-import ChatWindow from '../widgets/ChatWindow/ChatWindow';
-import SideNav from '../widgets/SideNav/SideNav';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
+
+import { useAuthStore } from '../entities/user/model';
+
+
+import ChatPage from '../pages/ChatPage/ChatPage';
+import SettingsPage from '../pages/SettingsPage/SettingsPage';
+import ContactsPage from '../pages/ContactsPage/ContactsPage';
+import CallsPage from '../pages/CallsPage/CallsPage';
+import AuthPage from '../pages/AuthPage/AuthPage';
+
 import './../styles/global.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('chats');
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+
+  if (!isAuthenticated) {
+    return <AuthPage />;
+  }
+
 
   return (
-    <div className={styles.app}>
-      <Layout>
-        <div className={styles.sidePanel}>
-          <div className={styles.panelContent}>
-            {activeTab === 'chats' && <ChatList />}
-            {activeTab === 'contacts' && (
-              <div className={styles.placeholder}>Contacts Page</div>
-            )}
-            {activeTab === 'calls' && (
-              <div className={styles.placeholder}>Calls Page</div>
-            )}
-            {activeTab === 'settings' && (
-              <div className={styles.placeholder}>Settings Page</div>
-            )}
-          </div>
-          <SideNav activeTab={activeTab} setActiveTab={setActiveTab} />
-        </div>
-        
-        <div className={styles.mainArea}>
-          {activeTab === 'chats' ? <ChatWindow /> : (
-            <div className={styles.placeholder}>
-              Please select a chat to start messaging
-            </div>
-          )}
-        </div>
-      </Layout>
-    </div>
+    <>
+      <BrowserRouter>
+
+          <Routes>
+
+            <Route path="/chats" element={<ChatPage />} />
+
+            <Route path="/chats/:chatId" element={<ChatPage />} />
+            
+
+            <Route path="/contacts" element={<ContactsPage />} />
+            <Route path="/calls" element={<CallsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            
+
+            <Route path="/" element={<Navigate to="/chats" replace />} />
+          </Routes>
+
+      </BrowserRouter>
+    </>
   );
 }
 

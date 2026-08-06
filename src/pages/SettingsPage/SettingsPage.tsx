@@ -1,0 +1,11 @@
+import styles from './SettingsPage.module.css';
+
+const SettingsPage = () => {
+    return (
+        <div className={styles.wrapper}>
+            <h1>Settings Page</h1>
+        </div>
+    )
+}
+
+export default SettingsPage;
