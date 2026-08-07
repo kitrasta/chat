@@ -15,7 +15,7 @@ const AuthPage = () => {
     setIsLoading(true);
 
     try {
-      await mockLogin(username);
+      await mockLogin(username, password);
     } catch (err) {
       setError('Произошла ошибка при входе. Попробуйте снова.');
     } finally {
