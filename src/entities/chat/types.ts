@@ -21,3 +21,10 @@ export interface Chat {
   members: User[];
   unreadCount: number;
 }
+
+export interface Call {
+  id: string;
+  name: string;
+  type: 'incoming' | 'outgoing' | 'missed';
+  timestamp: number;
+}

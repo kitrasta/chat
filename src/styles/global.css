@@ -42,6 +42,8 @@
   --color-accent-soft: var(--l-primary-100);
   --color-border: var(--l-neutral-200);
   --color-border-dark: var(--l-neutral-300);
+  --color-success: var(--l-success);
+  --color-error: var(--l-error);
 
   --color-bubble-sent-bg: var(--l-primary);
   --color-bubble-sent-text: var(--l-neutral-50);

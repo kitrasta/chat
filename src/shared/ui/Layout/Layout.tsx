@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.css';
 import SideNav from '../../../widgets/SideNav/SideNav';
-import SideBar from '../../../widgets/SideBar/SideBar';
 import ChatsList from '../../../widgets/ChatsList/ChatsList';
 import SettingsMenu from '../../../widgets/SettingsMenu/SettingsMenu';
 import CallsList from '../../../widgets/CallsList/CallsList';
@@ -10,10 +9,9 @@ import ContactsList from '../../../widgets/ContactsList/ContactsList';
 const Layout = () => {
   const location = useLocation();
   const path = location.pathname;
-  const isChatSection = path.startsWith('/chats');
 
   const renderLeftColumn = () => {
-    if (isChatSection) return <ChatsList />;
+    if (path.startsWith('/chats')) return <ChatsList />;
     if (path.startsWith('/settings')) return <SettingsMenu />;
     if (path.startsWith('/calls')) return <CallsList />;
     if (path.startsWith('/contacts')) return <ContactsList />;
@@ -27,7 +25,6 @@ const Layout = () => {
           {renderLeftColumn()}
         </div>
         <SideNav />
-        {isChatSection && <SideBar />}
       </div>
 
       {/* ПРАВАЯ КОЛОНКА */}
