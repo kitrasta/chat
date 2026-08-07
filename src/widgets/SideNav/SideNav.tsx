@@ -1,31 +1,29 @@
+import { NavLink } from 'react-router-dom';
 import { Users, Phone, MessageSquare, Settings } from 'lucide-react';
 import styles from './SideNav.module.css';
 
-interface SideNavProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
+const navItems = [
+  { to: '/contacts', icon: Users, label: 'Contacts' },
+  { to: '/calls', icon: Phone, label: 'Calls' },
+  { to: '/chats', icon: MessageSquare, label: 'Chats' },
+  { to: '/settings', icon: Settings, label: 'Settings' },
+];
 
-const SideNav = ({ activeTab, setActiveTab }: SideNavProps) => {
-  const navItems = [
-    { id: 'contacts', icon: Users, label: 'Contacts' },
-    { id: 'calls', icon: Phone, label: 'Calls' },
-    { id: 'chats', icon: MessageSquare, label: 'Chats' },
-    { id: 'settings', icon: Settings, label: 'Settings' },
-  ];
-
+const SideNav = () => {
   return (
-    <div className={styles.wrapper}>
-      {navItems.map(({ id, icon: Icon }) => (
-        <div 
-          key={id} 
-          className={`${styles.navItem} ${activeTab === id ? styles.active : ''}`}
-          onClick={() => setActiveTab(id)}
+    <nav className={styles.wrapper}>
+      {navItems.map(({ to, icon: Icon, label }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+          aria-label={label}
+          title={label}
         >
           <Icon size={22} strokeWidth={1} />
-        </div>
+        </NavLink>
       ))}
-    </div>
+    </nav>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './AuthPage.module.css';
 import { useAuthStore } from '../../entities/user/model';
+import { validateMatrixUsername } from '../../shared/lib/validators';
 
 const AuthPage = () => {
   const [username, setUsername] = useState('');
@@ -12,6 +13,13 @@ const AuthPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    const validationError = validateMatrixUsername(username);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsLoading(true);
 
     try {

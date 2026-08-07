@@ -1,12 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import styles from './SideBar.module.css';
 import { useChatStore } from '../../entities/chat/model';
 import CreateChatModal from '../../features/CreateChat/CreateChatModal';
 
 const SideBar = () => {
-  const { chats, activeChatId, setActiveChat } = useChatStore();
+  const { chats, activeChatId } = useChatStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const openChat = (chatId: string) => {
+    navigate(`/chats/${chatId}`);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -32,7 +38,7 @@ const SideBar = () => {
           <div 
             key={chat.id} 
             className={`${styles.chatItem} ${activeChatId === chat.id ? styles.active : ''}`}
-            onClick={() => setActiveChat(chat.id)}
+            onClick={() => openChat(chat.id)}
           >
             <div className={styles.avatar}>{chat.avatarUrl || '👤'}</div>
             <div className={styles.info}>
