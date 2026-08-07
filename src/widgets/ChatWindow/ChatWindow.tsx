@@ -1,17 +1,37 @@
+import { useState } from 'react';
 import styles from './ChatWindow.module.css';
 import { useChatStore } from '../../entities/chat/model';
+import { useAuthStore } from '../../entities/user/model';
 
 const ChatWindow = () => {
-  const { activeChatId, chats, messages } = useChatStore();
+  const { activeChatId, chats, messages, addMessage } = useChatStore();
+  const currentUserId = useAuthStore((state) => state.session?.userId) ?? 'me';
+  const [draft, setDraft] = useState('');
   const activeChat = chats.find(c => c.id === activeChatId);
   const currentMessages = activeChatId ? messages[activeChatId] || [] : [];
 
+  const handleSend = () => {
+    const text = draft.trim();
+    if (!activeChatId || !text) return;
+
+    addMessage(activeChatId, {
+      id: crypto.randomUUID(),
+      senderId: currentUserId,
+      text,
+      timestamp: Date.now(),
+      status: 'sending',
+    });
+    setDraft('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  };
+
   if (!activeChatId) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: 'var(--color-text-secondary)' }}>
-        Select a chat to start messaging
-      </div>
-    );
+    return <div className={styles.emptyState}>Select a chat to start messaging</div>;
   }
 
   return (
@@ -22,28 +42,37 @@ const ChatWindow = () => {
           <span className={styles.name}>{activeChat?.name || 'Unknown User'}</span>
         </div>
         <div className={styles.actions}>
-          <span style={{ cursor: 'pointer' }}>Search</span>
-          <span style={{ cursor: 'pointer' }}>More</span>
+          <span className={styles.actionItem}>Search</span>
+          <span className={styles.actionItem}>More</span>
         </div>
       </div>
 
       <div className={styles.content}>
         {currentMessages.length > 0 ? (
           currentMessages.map(msg => (
-            <div key={msg.id} className={`${styles.message} ${msg.senderId === 'me' ? styles.sent : styles.received}`}>
+            <div
+              key={msg.id}
+              className={`${styles.message} ${msg.senderId === currentUserId ? styles.sent : styles.received}`}
+            >
               {msg.text}
             </div>
           ))
         ) : (
-          <div style={{ textAlign: 'center', color: 'var(--color-text-secondary)', marginTop: '20px' }}>
-            No messages yet
-          </div>
+          <div className={styles.emptyMessages}>No messages yet</div>
         )}
       </div>
 
       <div className={styles.inputArea}>
-        <input className={styles.input} placeholder="Write a message..." />
-        <button className={styles.sendButton}>Send</button>
+        <input
+          className={styles.input}
+          placeholder="Write a message..."
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <button className={styles.sendButton} onClick={handleSend} disabled={!draft.trim()}>
+          Send
+        </button>
       </div>
     </div>
   );

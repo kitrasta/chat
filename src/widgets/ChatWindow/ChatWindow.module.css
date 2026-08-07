@@ -41,6 +41,24 @@
   font-size: 14px;
 }
 
+.actionItem {
+  cursor: pointer;
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--color-text-secondary);
+}
+
+.emptyMessages {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-top: 20px;
+}
+
 .content {
   flex: 1;
   overflow-y: auto;
@@ -102,4 +120,9 @@
   color: white;
   border-radius: var(--radius-sm);
   font-weight: 600;
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

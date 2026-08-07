@@ -7,7 +7,7 @@ interface AuthState {
   session: UserSession | null;
   isAuthenticated: boolean;
   login: (session: UserSession) => void;
-  mockLogin: (username: string) => Promise<void>;
+  mockLogin: (username: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -20,16 +20,20 @@ const loadSession = (): UserSession | null => {
   }
 };
 
+const initialSession = loadSession();
+
 export const useAuthStore = create<AuthState>((set) => ({
-  session: loadSession(),
-  isAuthenticated: loadSession() !== null,
+  session: initialSession,
+  isAuthenticated: initialSession !== null,
 
   login: (session) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
     set({ session, isAuthenticated: true });
   },
 
-  mockLogin: async (username) => {
+  mockLogin: async (username, password) => {
+    // TODO: заменить на реальный Matrix login
+    void password; // пока мок: пароль не проверяется
     await new Promise(resolve => setTimeout(resolve, 800));
     const fakeSession: UserSession = {
       accessToken: 'mock-token-atlas-123',
