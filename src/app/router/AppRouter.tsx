@@ -4,6 +4,7 @@ import ChatPage from '../../pages/ChatPage/ChatPage';
 import ContactsPage from '../../pages/ContactsPage/ContactsPage';
 import CallsPage from '../../pages/CallsPage/CallsPage';
 import SettingsPage from '../../pages/SettingsPage/SettingsPage';
+import AuthPage from '../../pages/AuthPage/AuthPage';
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/calls" element={<CallsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/" element={<Navigate to="/chats" replace />} />
       </Route>
     </Routes>

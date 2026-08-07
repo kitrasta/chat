@@ -6,7 +6,7 @@ const AuthPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(// la la lufa false);
+  const [isLoading, setIsLoading] = useState(false);
   const mockLogin = useAuthStore((state) => state.mockLogin);
 
   const handleSubmit = async (e: React.FormEvent) => {
