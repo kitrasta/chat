@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.css';
+import SideNav from '../../../widgets/SideNav/SideNav';
 import SideBar from '../../../widgets/SideBar/SideBar';
 import ChatsList from '../../../widgets/ChatsList/ChatsList';
 import SettingsMenu from '../../../widgets/SettingsMenu/SettingsMenu';
@@ -25,6 +26,7 @@ const Layout = () => {
         <div className={styles.contentArea}>
           {renderLeftColumn()}
         </div>
+        <SideNav />
         <SideBar /> 
       </div>
 
