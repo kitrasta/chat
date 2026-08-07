@@ -1,4 +1,4 @@
-import type { Chat, Message } from '../../entities/chat/types';
+import type { Call, Chat, Message, User } from '../../entities/chat/types';
 
 export const MOCK_CHATS: Chat[] = [
   {
@@ -58,3 +58,19 @@ export const MOCK_MESSAGES: Record<string, Message[]> = {
     { id: 'm3-2', senderId: 'me', text: 'Thanks! I used a professional reference', timestamp: Date.now(), status: 'sent' },
   ],
 };
+
+export const MOCK_CONTACTS: User[] = [
+  { id: 'user2', displayName: 'Alex Petrov', status: 'online' },
+  { id: 'user3', displayName: 'Maria Ivanova', status: 'offline' },
+  { id: 'user4', displayName: 'Dmitry Sidorov', status: 'online' },
+  { id: 'user5', displayName: 'Elena Kozlova', status: 'offline' },
+  { id: 'user6', displayName: 'Igor Volkov', status: 'online' },
+];
+
+export const MOCK_CALLS: Call[] = [
+  { id: 'c1', name: 'Alex Petrov', type: 'incoming', timestamp: Date.now() - 15 * 60 * 1000 },
+  { id: 'c2', name: 'Maria Ivanova', type: 'outgoing', timestamp: Date.now() - 2 * 60 * 60 * 1000 },
+  { id: 'c3', name: 'Dmitry Sidorov', type: 'missed', timestamp: Date.now() - 5 * 60 * 60 * 1000 },
+  { id: 'c4', name: 'Elena Kozlova', type: 'incoming', timestamp: Date.now() - 26 * 60 * 60 * 1000 },
+  { id: 'c5', name: 'Igor Volkov', type: 'outgoing', timestamp: Date.now() - 50 * 60 * 60 * 1000 },
+];
