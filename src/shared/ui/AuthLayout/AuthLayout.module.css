@@ -1,0 +1,28 @@
+.authLayout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  /* Используем переменные из global.css для поддержки тем */
+  background-color: var(--color-bg-main);
+  
+  /* Мягкий радиальный градиент для эффекта глубины */
+  background-image: radial-gradient(
+    circle at center, 
+    var(--color-bg-secondary) 0%, 
+    var(--color-bg-main) 100%
+  );
+  transition: background-color 0.3s ease;
+}
+
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+  z-index: 1;
+}

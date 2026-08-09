@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ChatWindow from '../../widgets/ChatWindow/ChatWindow';
-import { useChatStore } from '../../entities/chat/model';
+import { useChatStore } from '../../entities/rooms/model';
 import styles from './ChatPage.module.css';
 
 const ChatPage = () => {

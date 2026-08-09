@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ChatWindow.module.css';
-import { useChatStore } from '../../entities/chat/model';
+import { useChatStore } from '../../entities/rooms/model';
 import { useAuthStore } from '../../entities/user/model';
 
 const ChatWindow = () => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import styles from './ChatsList.module.css';
-import { useChatStore } from '../../entities/chat/model';
+import { useChatStore } from '../../entities/rooms/model';
 import CreateChatModal from '../../features/CreateChat/CreateChatModal';
 
 const ChatsList = () => {

@@ -1,4 +1,4 @@
-import type { Call, Chat, Message, User } from '../../entities/chat/types';
+import type { Call, Chat, Message, User } from '../../entities/rooms/types';
 
 export const MOCK_CHATS: Chat[] = [
   {

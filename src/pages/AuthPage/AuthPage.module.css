@@ -1,0 +1,136 @@
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  background: var(--color-l-neutral-color-n50);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+
+  background: var(--color-l-neutral-color-n50);
+  border: 1px solid var(--color-l-neutral-color-n200);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 8%);
+}
+
+.title {
+  margin: 0;
+
+  color: var(--color-l-neutral-color-n900);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 10px 0 32px;
+
+  color: var(--color-text-color-text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  color: var(--color-l-neutral-color-n900);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inputGroup input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+
+  color: var(--color-l-neutral-color-n900);
+  background: var(--color-l-neutral-color-n50);
+  border: 1px solid var(--color-l-neutral-color-n300);
+  border-radius: 8px;
+
+  font: inherit;
+  font-size: 15px;
+
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.inputGroup input::placeholder {
+  color: var(--color-l-neutral-color-n500);
+}
+
+.inputGroup input:hover {
+  border-color: var(--color-l-neutral-color-n400);
+}
+
+.inputGroup input:focus {
+  border-color: var(--color-l-primary-color-primary);
+  box-shadow: 0 0 0 3px var(--color-l-extended-primary-color-ep100);
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 4px;
+  padding: 13px 16px;
+
+  color: var(--color-l-neutral-color-n50);
+  background: var(--color-l-primary-color-primary);
+  border: none;
+  border-radius: 8px;
+
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    opacity 0.15s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #5944c4;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  padding: 10px 12px;
+
+  color: var(--color-l-alert-color-error);
+  background: var(--color-l-extended-alert-color-error-ep100);
+  border-radius: 8px;
+
+  font-size: 14px;
+  line-height: 1.4;
+}
+

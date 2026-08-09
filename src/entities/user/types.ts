@@ -1,6 +1,13 @@
-export interface UserSession {
-  accessToken: string;
-  userId: string;
-  homeServer: string;
-  deviceId: string;
+export interface User {
+
+userId: string;
+displayName: string;
+avatarUrl: string;
+presence: UserPresence;
+
 }
+
+export type UserPresence = 
+| 'online'
+| 'offline'
+| 'unavailable'
