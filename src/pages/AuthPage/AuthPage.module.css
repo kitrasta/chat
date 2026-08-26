@@ -123,6 +123,20 @@
   cursor: not-allowed;
 }
 
+.switchButton {
+  padding: 4px;
+  color: var(--color-l-primary-color-primary);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.switchButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .error {
   padding: 10px 12px;
 
@@ -130,6 +144,15 @@
   background: var(--color-l-extended-alert-color-error-ep100);
   border-radius: 8px;
 
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.emailNotice {
+  padding: 10px 12px;
+  color: var(--color-text-primary);
+  background: var(--color-accent-soft);
+  border-radius: 8px;
   font-size: 14px;
   line-height: 1.4;
 }

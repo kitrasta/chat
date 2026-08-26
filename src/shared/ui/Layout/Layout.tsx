@@ -5,10 +5,23 @@ import ChatsList from '../../../widgets/ChatsList/ChatsList';
 import SettingsMenu from '../../../widgets/SettingsMenu/SettingsMenu';
 import CallsList from '../../../widgets/CallsList/CallsList';
 import ContactsList from '../../../widgets/ContactsList/ContactsList';
+import { useEffect } from 'react';
+import { useChatStore } from '../../../entities/rooms/model';
+import { useAuthStore } from '../../../entities/user/model';
+import { restoreSession } from '../../../shared/api/matrix/matrixClient';
 
 const Layout = () => {
+  const loadRooms = useChatStore((state) => state.load);
+  const session = useAuthStore((state) => state.session);
   const location = useLocation();
   const path = location.pathname;
+
+  useEffect(() => {
+    if (!session) return;
+
+    restoreSession(session);
+    void loadRooms();
+  }, [loadRooms, session]);
 
   const renderLeftColumn = () => {
     if (path.startsWith('/chats')) return <ChatsList />;

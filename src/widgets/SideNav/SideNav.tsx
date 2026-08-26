@@ -20,7 +20,7 @@ const SideNav = () => {
           aria-label={label}
           title={label}
         >
-          <Icon size={22} strokeWidth={1} />
+          <Icon size={28} strokeWidth={1} />
         </NavLink>
       ))}
     </nav>
