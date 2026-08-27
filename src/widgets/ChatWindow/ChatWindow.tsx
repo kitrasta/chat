@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './ChatWindow.module.css';
 import { useChatStore } from '../../entities/rooms/model';
-import { useAuthStore } from '../../entities/user/model';
+import { useAuthStore } from '../../entities/types/user/model';
 import { sendMessage } from '../../shared/api/matrix/rooms';
 
 const ChatWindow = () => {

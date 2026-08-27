@@ -7,7 +7,7 @@ import CallsList from '../../../widgets/CallsList/CallsList';
 import ContactsList from '../../../widgets/ContactsList/ContactsList';
 import { useEffect } from 'react';
 import { useChatStore } from '../../../entities/rooms/model';
-import { useAuthStore } from '../../../entities/user/model';
+import { useAuthStore } from '../../../entities/types/user/model';
 import { restoreSession } from '../../../shared/api/matrix/matrixClient';
 
 const Layout = () => {

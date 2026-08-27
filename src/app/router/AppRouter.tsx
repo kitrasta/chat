@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '../../shared/ui/Layout/Layout';
 import AuthLayout from '../../shared/ui/AuthLayout/AuthLayout'; // Твой новый лейаут
-import { useAuthStore } from '../../entities/user/model';
+import { useAuthStore } from '../../entities/types/user/model';
 
 import ChatPage from '../../pages/ChatPage/ChatPage';
 import ContactsPage from '../../pages/ContactsPage/ContactsPage';

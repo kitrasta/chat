@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './AuthPage.module.css';
-import { useAuthStore } from '../../entities/user/model';
+import { useAuthStore } from '../../entities/types/user/model';
 import { validateMatrixUsername } from '../../shared/lib/validators';
 import {
   login as matrixLogin,
