@@ -6,22 +6,30 @@ import SettingsMenu from '../../../widgets/SettingsMenu/SettingsMenu';
 import CallsList from '../../../widgets/CallsList/CallsList';
 import ContactsList from '../../../widgets/ContactsList/ContactsList';
 import { useEffect } from 'react';
-import { useChatStore } from '../../../entities/rooms/model';
-import { useAuthStore } from '../../../entities/types/user/model';
-import { restoreSession } from '../../../shared/api/matrix/matrixClient';
+import { useChatStore } from '../../../entities/chat/model';
+import { useSessionStore } from '../../../entities/session/session-store';
+import * as matrix from '../../../shared/lib/matrix';
 
 const Layout = () => {
   const loadRooms = useChatStore((state) => state.load);
-  const session = useAuthStore((state) => state.session);
+  const user = useSessionStore((state) => state.user);
   const location = useLocation();
   const path = location.pathname;
 
   useEffect(() => {
-    if (!session) return;
+    if (!user) return;
 
-    restoreSession(session);
+    // Если в сторе есть токен — восстанавливаем клиент
+    if (user.accessToken) {
+      matrix.restoreSession({
+        accessToken: user.accessToken,
+        userId: user.userId,
+        deviceId: user.deviceId ?? '',
+      });
+    }
+
     void loadRooms();
-  }, [loadRooms, session]);
+  }, [user, loadRooms]);
 
   const renderLeftColumn = () => {
     if (path.startsWith('/chats')) return <ChatsList />;

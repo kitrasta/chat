@@ -1,7 +1,7 @@
 import { User, Bell, Lock, Info, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SettingsMenu.module.css';
-import { useAuthStore } from '../../entities/types/user/model';
+import { useSessionStore } from '../../entities/session/session-store';
 
 const menuItems = [
   { id: 'profile', label: 'Профиль', icon: User },
@@ -11,7 +11,7 @@ const menuItems = [
 ];
 
 const SettingsMenu = () => {
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useSessionStore((state) => state.logout);
   const navigate = useNavigate();
 
   const handleLogout = async () => {

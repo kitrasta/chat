@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './ContactsList.module.css';
 import { loadContacts } from '../../shared/api/matrix/rooms';
-import type { User } from '../../entities/types/user/types';
+import type { User } from '../../entities/user/user/types';
 
 const ContactsList = () => {
   const [contacts, setContacts] = useState<User[]>([]);

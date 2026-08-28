@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '../../shared/ui/Layout/Layout';
 import AuthLayout from '../../shared/ui/AuthLayout/AuthLayout'; // Твой новый лейаут
-import { useAuthStore } from '../../entities/types/user/model';
+import { useSessionStore } from '../../entities/session/session-store';
 
 import ChatPage from '../../pages/ChatPage/ChatPage';
 import ContactsPage from '../../pages/ContactsPage/ContactsPage';
@@ -10,7 +10,7 @@ import SettingsPage from '../../pages/SettingsPage/SettingsPage';
 import AuthPage from '../../pages/AuthPage/AuthPage';
 
 const AppRouter = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isAuthenticated = useSessionStore((state) => state.isLoggedIn);
 
   return (
     <Routes>

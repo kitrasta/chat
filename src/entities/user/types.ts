@@ -9,7 +9,7 @@ export type User = {
 
 }
 
-export type userSession = {
+export type UserSession = {
     user: User | null;
     isLoggedIn: boolean;
     isLoading: boolean;
@@ -28,10 +28,10 @@ export type RegisterData = {
     email: string;
 }
 
-export type Authresponse = {
+export type AuthResponse = {
     userId: string;
     accessToken: string;
     deviceId: string;
 }
 
-export type UpdateUUserData = Partial<User>;
+export type UpdateUserData = Partial<User>;
