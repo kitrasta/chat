@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import * as matrix from '@shared/lib/matrix';
+import * as matrix from '../../shared/lib/matrix';
 
 type User = {
   userId: string;

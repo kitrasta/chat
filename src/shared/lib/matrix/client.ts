@@ -1,5 +1,5 @@
 import * as sdk from "matrix-js-sdk";
-import { MATRIX_CONFIG } from "../shared/lib/matrix/config";
+import { MATRIX_CONFIG } from "./config";
 
 
 
@@ -93,17 +93,17 @@ export const sendMessage = async (roomId: string, text: string) => {
 export const getUser = async () => {
   const currentClient = getClient();
   const userId = currentClient.getUserId();
-  
+
   if (!userId) return null;
-  
+
   let displayName = userId;
   try {
-    const name = await currentClient.getDisplayName(userId);
-    if (name) displayName = name;
+    const profile = await currentClient.getProfileInfo(userId);
+    if (profile?.displayname) displayName = profile.displayname;
   } catch (error) {
     console.warn('Не удалось получить display name:', error);
   }
-  
+
   return {
     userId,
     displayName,
