@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import styles from './ChatsList.module.css';
-import { useChatStore } from '../../entities/rooms/model';
+import { useChatStore } from '../../entities/chat/model';
 import CreateChatModal from '../../features/CreateChat/CreateChatModal';
 
 const ChatsList = () => {
@@ -34,7 +34,7 @@ const ChatsList = () => {
       />
 
       <div className={styles.list}>
-        {chats.map(chat => (
+        {chats.map((chat) => (
           <div
             key={chat.id}
             className={`${styles.chatItem} ${activeChatId === chat.id ? styles.active : ''}`}
@@ -43,13 +43,14 @@ const ChatsList = () => {
             <div className={styles.avatar}>{chat.avatarUrl || '👤'}</div>
             <div className={styles.info}>
               <span className={styles.name}>{chat.name}</span>
-              <span className={styles.preview}>{chat.lastMessage?.text || 'No messages'}</span>
+              <span className={styles.preview}>{chat.lastMessage || 'No messages'}</span>
             </div>
-            {chat.unreadCount > 0 && (
+            {(chat.unreadCount ?? 0) > 0 && (
               <span className={styles.unreadBadge}>{chat.unreadCount}</span>
             )}
           </div>
         ))}
+        {chats.length === 0 && <div className={styles.empty}>No chats yet</div>}
       </div>
 
       <CreateChatModal

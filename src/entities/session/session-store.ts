@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import * as matrix from '../../shared/lib/matrix';
-import type { User, UserSession } from '../user/types';
+import type { UserSession } from '../user/types';
 
 type SessionStore = UserSession & {
   login: (username: string, password: string) => Promise<void>;

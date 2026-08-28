@@ -1,71 +1,77 @@
 import * as sdk from "matrix-js-sdk";
 import { MATRIX_CONFIG } from "./config";
 
-
+// ===== Тип сессии =====
+export interface SessionData {
+  accessToken: string;
+  userId: string;
+  deviceId: string;
+}
 
 // ===== Состояние =====
 let client: sdk.MatrixClient | null = null;
 
-// ===== Инициализация =====
-export const initClient = () => {
-  if (client) {
-    console.log('⚠️ Клиент уже инициализирован');
-    return;
-  }
-
-  client = sdk.createClient({
-    baseUrl: MATRIX_CONFIG.baseUrl,
-  });
-
-  console.log('✅ Matrix клиент инициализирован');
-};
-
 // ===== Получение клиента =====
 export const getClient = (): sdk.MatrixClient => {
   if (!client) {
-    throw new Error('❌ Клиент не инициализирован');
+    throw new Error('Клиент не инициализирован');
   }
   return client;
 };
 
+// ===== Восстановление сессии =====
+export const restoreSession = (session: SessionData) => {
+  client = sdk.createClient({
+    baseUrl: MATRIX_CONFIG.baseUrl,
+    accessToken: session.accessToken,
+    userId: session.userId,
+    deviceId: session.deviceId,
+  });
+};
+
 // ===== Вход =====
 export const login = async (username: string, password: string) => {
-  try {
-    const tempClient = getClient();
-    
-    const response = await tempClient.login('m.login.password', {
+  // Создаём временный клиент для авторизации (не зависит от глобального)
+  const authClient = sdk.createClient({
+    baseUrl: MATRIX_CONFIG.baseUrl,
+  });
+
+  const response = await authClient.login('m.login.password', {
+    identifier: {
+      type: 'm.id.user',
       user: username,
-      password: password,
-      device_id: MATRIX_CONFIG.deviceId,
-    });
+    },
+    password,
+    device_id: MATRIX_CONFIG.deviceId,
+  });
 
-    client = sdk.createClient({
-      baseUrl: MATRIX_CONFIG.baseUrl,
-      accessToken: response.access_token,
-      userId: response.user_id,
-      deviceId: response.device_id,
-    });
+  // Заменяем глобальный клиент на авторизованный
+  client = sdk.createClient({
+    baseUrl: MATRIX_CONFIG.baseUrl,
+    accessToken: response.access_token,
+    userId: response.user_id,
+    deviceId: response.device_id,
+  });
 
-    console.log('✅ Вход выполнен:', response.user_id);
-    
-    return {
-      userId: response.user_id,
-      accessToken: response.access_token,
-      deviceId: response.device_id,
-    };
-  } catch (error: any) {
-    console.error('❌ Ошибка входа:', error.message);
-    throw error;
-  }
+  return {
+    userId: response.user_id,
+    accessToken: response.access_token,
+    deviceId: response.device_id,
+  };
 };
 
 // ===== Выход =====
-export const logout = () => {
-  if (client) {
+export const logout = async () => {
+  if (!client) return;
+
+  try {
+    await client.logout();
+  } catch {
+    // Игнорируем ошибки logout — главное остановить клиент
+  } finally {
     client.stopClient();
     client = null;
   }
-  console.log('👋 Выход выполнен');
 };
 
 // ===== Синхронизация =====
@@ -74,7 +80,6 @@ export const sync = async () => {
   await currentClient.startClient({
     initialSyncLimit: MATRIX_CONFIG.initialSyncLimit,
   });
-  console.log('🔄 Синхронизация завершена');
 };
 
 // ===== Комнаты =====
@@ -100,8 +105,8 @@ export const getUser = async () => {
   try {
     const profile = await currentClient.getProfileInfo(userId);
     if (profile?.displayname) displayName = profile.displayname;
-  } catch (error) {
-    console.warn('Не удалось получить display name:', error);
+  } catch {
+    // Оставляем userId как fallback
   }
 
   return {

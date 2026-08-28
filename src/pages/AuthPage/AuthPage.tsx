@@ -6,8 +6,6 @@ import { validateMatrixUsername } from '../../shared/lib/validators';
 const AuthPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistration, setIsRegistration] = useState(false);
-  const [email, setEmail] = useState('');
 
   // Всё берём из стора — он источник правды
   const login = useSessionStore((s) => s.login);

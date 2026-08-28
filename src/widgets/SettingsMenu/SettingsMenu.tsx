@@ -14,8 +14,8 @@ const SettingsMenu = () => {
   const logout = useSessionStore((state) => state.logout);
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    void logout();
     navigate('/auth', { replace: true });
   };
 
