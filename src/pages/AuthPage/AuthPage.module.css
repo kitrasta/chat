@@ -6,7 +6,7 @@
   justify-content: center;
   padding: 24px;
 
-  background: var(--color-l-neutral-color-n50);
+  background: var(--color-bg-main);
 }
 
 .card {
@@ -14,8 +14,8 @@
   max-width: 420px;
   padding: 40px;
 
-  background: var(--color-l-neutral-color-n50);
-  border: 1px solid var(--color-l-neutral-color-n200);
+  background: var(--color-bg-main);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgb(0 0 0 / 8%);
 }
@@ -23,7 +23,7 @@
 .title {
   margin: 0;
 
-  color: var(--color-l-neutral-color-n900);
+  color: var(--color-text-primary);
   font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
@@ -33,7 +33,7 @@
 .subtitle {
   margin: 10px 0 32px;
 
-  color: var(--color-text-color-text-secondary);
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.5;
   text-align: center;
@@ -52,7 +52,7 @@
 }
 
 .inputGroup label {
-  color: var(--color-l-neutral-color-n900);
+  color: var(--color-text-primary);
   font-size: 14px;
   font-weight: 500;
 }
@@ -62,9 +62,9 @@
   box-sizing: border-box;
   padding: 12px 14px;
 
-  color: var(--color-l-neutral-color-n900);
-  background: var(--color-l-neutral-color-n50);
-  border: 1px solid var(--color-l-neutral-color-n300);
+  color: var(--color-text-primary);
+  background: var(--color-bg-main);
+  border: 1px solid var(--color-border-strong);
   border-radius: 8px;
 
   font: inherit;
@@ -77,16 +77,16 @@
 }
 
 .inputGroup input::placeholder {
-  color: var(--color-l-neutral-color-n500);
+  color: var(--color-text-tertiary);
 }
 
 .inputGroup input:hover {
-  border-color: var(--color-l-neutral-color-n400);
+  border-color: var(--color-border-strong);
 }
 
 .inputGroup input:focus {
-  border-color: var(--color-l-primary-color-primary);
-  box-shadow: 0 0 0 3px var(--color-l-extended-primary-color-ep100);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
 }
 
 .submitButton {
@@ -94,8 +94,8 @@
   margin-top: 4px;
   padding: 13px 16px;
 
-  color: var(--color-l-neutral-color-n50);
-  background: var(--color-l-primary-color-primary);
+  color: var(--color-bg-main);
+  background: var(--color-accent);
   border: none;
   border-radius: 8px;
 
@@ -111,7 +111,7 @@
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #5944c4;
+  background: var(--color-accent-hover);
 }
 
 .submitButton:active:not(:disabled) {
@@ -125,7 +125,7 @@
 
 .switchButton {
   padding: 4px;
-  color: var(--color-l-primary-color-primary);
+  color: var(--color-accent);
   background: transparent;
   font: inherit;
   font-size: 14px;
@@ -140,8 +140,8 @@
 .error {
   padding: 10px 12px;
 
-  color: var(--color-l-alert-color-error);
-  background: var(--color-l-extended-alert-color-error-ep100);
+  color: var(--color-error);
+  background: var(--color-error-soft);
   border-radius: 8px;
 
   font-size: 14px;
