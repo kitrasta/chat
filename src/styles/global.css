@@ -1,57 +1,70 @@
-/* :root — Light theme */
+/* ============================================================
+   Capsa — design tokens (палитра lucide.dev: чёрный + красный)
+   ============================================================ */
+
 :root {
-  /* Background */
-  --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --bg-tertiary: #f5f5f5;
+  /* Шрифт */
+  --font-main: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  /* Text */
-  --text-primary: #1a1a1a;
-  --text-secondary: rgba(60, 60, 67, 0.78);
-  --text-tertiary: rgba(60, 60, 67, 0.56);
-  --text-muted: rgba(60, 60, 67, 0.32);
+  /* Фоны — глубокий чёрный с лёгкими серыми подъёмами */
+  --color-bg-main: #0a0a0b;
+  --color-bg-secondary: #131315;
+  --color-bg-tertiary: #1c1c1f;
 
-  /* Accent */
-  --accent: #f56565;
-  --accent-hover: #dc5a5a;
-  --accent-subtle: rgba(245, 101, 101, 0.1);
+  /* Текст */
+  --color-text-primary: #fafafa;
+  --color-text-secondary: rgba(250, 250, 250, 0.64);
+  --color-text-tertiary: rgba(250, 250, 250, 0.42);
+  --color-text-disabled: rgba(250, 250, 250, 0.24);
 
-  /* Borders */
-  --border: rgba(60, 60, 67, 0.12);
-  --border-strong: rgba(60, 60, 67, 0.16);
+  /* Акцент — красный */
+  --color-accent: #e5484d;
+  --color-accent-hover: #f2555a;
+  --color-accent-soft: rgba(229, 72, 77, 0.14);
 
-  /* Surface */
-  --surface-hover: rgba(60, 60, 67, 0.06);
-  --surface-active: rgba(60, 60, 67, 0.1);
+  /* Границы */
+  --color-border: rgba(250, 250, 250, 0.1);
+  --color-border-strong: rgba(250, 250, 250, 0.16);
+
+  /* Поверхности */
+  --color-surface-hover: rgba(250, 250, 250, 0.06);
+  --color-surface-active: rgba(250, 250, 250, 0.1);
+
+  /* Статусы */
+  --color-error: #e5484d;
+  --color-error-soft: rgba(229, 72, 77, 0.14);
+  --color-success: #30a46c;
+
+  /* Скругления */
+  --radius-sm: 8px;
+  --radius-md: 12px;
 }
 
-/* .dark — Dark theme */
-.dark {
-  /* Background */
-  --bg-primary: #0f0f10;
-  --bg-secondary: #1b1b1d;
-  --bg-tertiary: #242428;
+/* Алиасы старой схемы (для обратной совместимости) */
+:root {
+  --bg-primary: var(--color-bg-main);
+  --bg-secondary: var(--color-bg-secondary);
+  --bg-tertiary: var(--color-bg-tertiary);
 
-  /* Text */
-  --text-primary: #dfdfd6;
-  --text-secondary: rgba(235, 235, 245, 0.64);
-  --text-tertiary: rgba(235, 235, 245, 0.48);
-  --text-muted: rgba(235, 235, 245, 0.16);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-tertiary: var(--color-text-tertiary);
+  --text-muted: var(--color-text-disabled);
 
-  /* Accent */
-  --accent: #f56565;
-  --accent-hover: #f67373;
-  --accent-subtle: rgba(245, 101, 101, 0.15);
+  --accent: var(--color-accent);
+  --accent-hover: var(--color-accent-hover);
+  --accent-subtle: var(--color-accent-soft);
 
-  /* Borders */
-  --border: rgba(235, 235, 245, 0.1);
-  --border-strong: rgba(235, 235, 245, 0.16);
+  --border: var(--color-border);
+  --border-strong: var(--color-border-strong);
 
-  /* Surface */
-  --surface-hover: rgba(235, 235, 245, 0.06);
-  --surface-active: rgba(235, 235, 245, 0.1);
+  --surface-hover: var(--color-surface-hover);
+  --surface-active: var(--color-surface-active);
 }
 
+/* ============================================================
+   Базовые стили
+   ============================================================ */
 
 * {
   box-sizing: border-box;
@@ -61,8 +74,8 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--vp-c-bg-alt-up);
-  color: var(--vp-c-text-1);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
   overflow: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -72,8 +85,32 @@ button {
   border: none;
   outline: none;
   transition: opacity 0.2s ease;
+  font-family: inherit;
 }
 
 button:hover {
-  opacity: 0.8;
+  opacity: 0.85;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input {
+  font-family: inherit;
+  color-scheme: dark;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }

@@ -24,7 +24,7 @@
 }
 
 .navItem:hover {
-  background-color: var(--vp-code-editor-comment);
+  background-color: var(--color-text-tertiary);
   color: var(--color-text-primary);
 }
 
