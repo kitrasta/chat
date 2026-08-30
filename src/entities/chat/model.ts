@@ -1,11 +1,20 @@
 import { create } from 'zustand';
-import type { ChatState } from './types';
+import * as matrix from '../../shared/lib/matrix';
+import type { ChatState, Room } from './types';
 
 export const useChatStore = create<ChatState>((set) => ({
   chats: [],
   activeChatId: null,
   load: async () => {
-    // TODO: matrix.getRooms() → set({ chats })
+    const rooms = matrix.getRooms();
+
+    const chats: Room[] = rooms.map((room) => ({
+        id: room.roomId,
+        name: room.name,
+        unreadCount: room.getUnreadNotificationCount(),
+    }));
+
+    set({ chats });
   },
   setActiveChat: (id) => set({ activeChatId: id }),
 }));

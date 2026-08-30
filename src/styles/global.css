@@ -7,8 +7,8 @@
   --font-main: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Фоны — глубокий чёрный с лёгкими серыми подъёмами */
-  --color-bg-main: #0a0a0b;
-  --color-bg-secondary: #131315;
+  --color-bg-main: #131315;
+  --color-bg-secondary: #0a0a0b;
   --color-bg-tertiary: #1c1c1f;
 
   /* Текст */

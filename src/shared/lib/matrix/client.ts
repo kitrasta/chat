@@ -42,7 +42,6 @@ export const login = async (username: string, password: string) => {
       user: username,
     },
     password,
-    device_id: MATRIX_CONFIG.deviceId,
   });
 
   // Заменяем глобальный клиент на авторизованный
@@ -119,3 +118,4 @@ export const getUser = async () => {
 export const isLoggedIn = (): boolean => {
   return !!client && !!client.getUserId();
 };
+

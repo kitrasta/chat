@@ -6,9 +6,11 @@ import { useChatStore } from '../../entities/chat/model';
 import CreateChatModal from '../../features/CreateChat/CreateChatModal';
 
 const ChatsList = () => {
-  const { chats, activeChatId } = useChatStore();
+  const chats = useChatStore((state) => state.chats);
+  const activeChatId = useChatStore((state) => state.activeChatId);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
 
   const openChat = (chatId: string) => {
     navigate(`/chats/${chatId}`);

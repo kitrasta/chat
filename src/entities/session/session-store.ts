@@ -47,12 +47,9 @@ export const useSessionStore = create<SessionStore>()(
           } else {
             throw new Error('Не удалось загрузить данные пользователя');
           }
-        } catch (error: any) {
-          set({
-            isLoading: false,
-            error: error.message || 'Ошибка при входе',
-            isLoggedIn: false,
-          });
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : 'Ошибка при входе';
+          set({ isLoading: false, error: message, isLoggedIn: false });
           throw error;
         }
       },
