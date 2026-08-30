@@ -7,29 +7,40 @@ import CallsList from '../../../widgets/CallsList/CallsList';
 import ContactsList from '../../../widgets/ContactsList/ContactsList';
 import { useEffect } from 'react';
 import { useChatStore } from '../../../entities/chat/model';
+import { useMessageStore } from '../../../entities/message/model';
 import { useSessionStore } from '../../../entities/session/session-store';
 import * as matrix from '../../../shared/lib/matrix';
 
 const Layout = () => {
   const loadRooms = useChatStore((state) => state.load);
   const user = useSessionStore((state) => state.user);
+  const addMessage = useMessageStore((state) => state.addMessage);
   const location = useLocation();
   const path = location.pathname;
 
   useEffect(() => {
     if (!user) return;
 
-    // Если в сторе есть токен — восстанавливаем клиент
+    // Если в сторе есть токен — восстанавливаем клиент и запускаем синхронизацию
     if (user.accessToken) {
       matrix.restoreSession({
         accessToken: user.accessToken,
         userId: user.userId,
         deviceId: user.deviceId ?? '',
       });
+      void matrix.sync();
     }
 
+    const unsubscribe = matrix.listenToMessages((message) => {
+      addMessage(message);
+    });
+
     void loadRooms();
-  }, [user, loadRooms]);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [user, loadRooms, addMessage]);
 
   const renderLeftColumn = () => {
     if (path.startsWith('/chats')) return <ChatsList />;

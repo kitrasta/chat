@@ -8,8 +8,18 @@ export interface SessionData {
   deviceId: string;
 }
 
+// ===== Сообщение =====
+export type MatrixMessage = {
+  id: string;
+  roomId: string;
+  senderId: string;
+  content: string;
+  timestamp: number;
+};
+
 // ===== Состояние =====
 let client: sdk.MatrixClient | null = null;
+let isClientRunning = false;
 
 // ===== Получение клиента =====
 export const getClient = (): sdk.MatrixClient => {
@@ -76,15 +86,71 @@ export const logout = async () => {
 // ===== Синхронизация =====
 export const sync = async () => {
   const currentClient = getClient();
+  if (isClientRunning) return;
   await currentClient.startClient({
     initialSyncLimit: MATRIX_CONFIG.initialSyncLimit,
   });
+  isClientRunning = true;
 };
 
 // ===== Комнаты =====
 export const getRooms = () => {
   const currentClient = getClient();
   return currentClient.getRooms();
+};
+
+// ===== Сообщения =====
+export const getMessages = (roomId: string): MatrixMessage[] => {
+  const currentClient = getClient();
+  const room = currentClient.getRoom(roomId);
+  if (!room) return [];
+
+  const timeline = room.getLiveTimeline();
+  const events = timeline.getEvents();
+
+  return events
+    .filter((event) => event.getType() === 'm.room.message')
+    .map((event) => ({
+      id: event.getId() ?? crypto.randomUUID(),
+      roomId,
+      senderId: event.getSender() ?? '',
+      content: event.getContent().body ?? '',
+      timestamp: event.getTs(),
+    }));
+};
+
+export const listenToMessages = (
+  callback: (message: MatrixMessage) => void
+): (() => void) => {
+  const currentClient = getClient();
+
+  const handler = (
+    event: sdk.MatrixEvent,
+    room: sdk.Room | undefined,
+    _toStartOfTimeline: boolean | undefined,
+    _removed: boolean,
+  ) => {
+    if (!room) return;
+    if (event.getType() !== 'm.room.message') return;
+    if (event.isDecryptionFailure?.()) return;
+
+    const content = event.getContent();
+    if (!content || typeof content.body !== 'string') return;
+
+    callback({
+      id: event.getId() ?? crypto.randomUUID(),
+      roomId: room.roomId,
+      senderId: event.getSender() ?? '',
+      content: content.body,
+      timestamp: event.getTs(),
+    });
+  };
+
+  currentClient.on(sdk.RoomEvent.Timeline, handler);
+
+  return () => {
+    currentClient.off(sdk.RoomEvent.Timeline, handler);
+  };
 };
 
 // ===== Отправка сообщения =====
